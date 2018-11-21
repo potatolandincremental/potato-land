@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "protos";
+
+package protos;
+
+service AuthService {
+    rpc login (loginRequest) returns (loginResponse);
+    rpc refresh (refreshRequest) returns (refreshResponse);
+    rpc changePassword (changePasswordRequest) returns (changePasswordResponse);
+    rpc listUsers (listUsersRequest) returns (listUsersResponse);
+    rpc createUser (createUserRequest) returns (User);
+    rpc deleteUser (deleteUserRequest) returns (deleteUserResponse);
+
+    rpc getPublicKey (getPublicKeyRequest) returns (getPublicKeyResponse);
+    rpc getUploadKey (getUploadKeyRequest) returns (UploadKey);
+}
+
+//Objects
+message User {
+    string id = 1;
+    string username = 2;
+    repeated string roles = 3;
+}
+
+//Req / res
+//Formatting: [name]Request, [name]Response
+//HTTP URL will be /name
+//i.e. loginRequest -> /login and will validate against the loginRequest object and require a loginResponse out
+//which will automatically be turned into JSON
+
+
+message getUploadKeyRequest {
+
+}
+message UploadKey {
+    string key = 1;
+}
+
+message getPublicKeyRequest {
+}
+message getPublicKeyResponse {
+    string publicKey = 1;
+}
+
+message loginRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message loginResponse {
+    string accessToken = 1;
+    string refreshToken = 2;
+}
+
+message refreshRequest {
+    string refreshToken = 1;
+}
+message refreshResponse {
+    string accessToken = 1;
+    string refreshToken = 2;
+}
+
+message changePasswordRequest {
+    //Optional, can be provided by admin to change another users password
+    //Defaults to current users password
+    string username = 1;
+    string password = 2;
+}
+message changePasswordResponse {
+
+}
+
+message listUsersRequest {
+
+}
+message listUsersResponse {
+    repeated User users = 1;
+}
+
+message deleteUserRequest {
+    string username = 1;
+}
+message deleteUserResponse {
+
+}
+
+message createUserRequest {
+    string username = 1;
+    string password = 2;
+    repeated string roles = 3;
+}

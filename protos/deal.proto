@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.colfax.deals.protos";
+
+package protos;
+
+service DealService {
+    rpc createDeal (createDealRequest) returns (Deal);
+    rpc deleteDeal (deleteDealRequest) returns (deleteDealResponse);
+    rpc listDeals (listDealsRequest) returns (listDealsResponse);
+}
+
+message Deal {
+    string id = 1;
+    string description = 2;
+    string vendor = 3;
+    string deal = 4;
+    string expiration = 5;
+    string type = 6;
+    string picture = 7;
+    string item = 8;
+}
+
+message createDealRequest {
+    string description = 1;
+    string vendor = 3;
+    string deal = 4;
+    string expiration = 5;
+    string type = 6;
+    string picture = 7;
+    string item = 8;
+}
+
+message deleteDealRequest {
+    string id = 1;
+}
+message deleteDealResponse {
+
+}
+
+message listDealsRequest {
+
+}
+message listDealsResponse {
+    repeated Deal deals = 1;
+}
