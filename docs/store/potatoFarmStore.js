@@ -38,7 +38,7 @@ class PotatoFarmStore {
             this.plantedPotatoes += potatoesToPlant;
             this.plotsReady = false;
             this.timeElapsed = 0;
-            setTimeout(this.setPlotTimeout, 00);
+            this.setPlotTimeout();
         };
         this.buyFarmers = (n) => {
             // console.log("farmers", this.farmers);
@@ -130,14 +130,11 @@ class PotatoFarmStore {
                     this.plantedPotatoes -= maxPlotsCanHarvest;
                     if (this.plantedPotatoes == 0) {
                         setTimeout(this.farmerPlant, 2000);
+                        return;
                     }
-                    else {
-                        setTimeout(plotTimeout, 2000);
-                    }
-                    return;
                 }
                 this.timeElapsed = nextTime;
-                this.setPlotTimeout();
+                setTimeout(plotTimeout, 1000);
             };
             setTimeout(plotTimeout, 1000);
         };
@@ -173,6 +170,7 @@ class PotatoFarmStore {
             this.mutateFarmState(n);
             return;
         };
+        this.setPlotTimeout();
         setInterval(() => {
             this.freePotatoes;
             this.plots;

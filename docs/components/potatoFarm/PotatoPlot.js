@@ -34,7 +34,7 @@ const PlotPiece = styled_components_1.default.div `
   height: 100px;
 `;
 const FilledPlot = styled_components_1.default(PlotPiece) `
-  border: 3px solid rgb(188, 100, 0);
+  border: 1px solid rgb(188, 100, 0);
   background: repeating-linear-gradient(
     45deg,
     rgb(188, 100, 0),
@@ -44,7 +44,7 @@ const FilledPlot = styled_components_1.default(PlotPiece) `
   );
 `;
 const FilledPlotReady = styled_components_1.default(PlotPiece) `
-  border: 3px solid green;
+  border: 1px solid green;
   background: repeating-linear-gradient(
     45deg,
     green,
