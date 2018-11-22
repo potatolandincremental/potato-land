@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import * as React from "react";
 import { withRouter } from "react-router-dom";
 import { MoneyStoreProps } from "../../store/moneyStore";
-import { ColumnDiv, RowDiv } from "../styles/styles";
+import { FullWidthContainer, RowDiv } from "../styles/styles";
 
 const styles = {
   root: {
@@ -48,21 +48,20 @@ class Navigation extends React.Component<Props, State> {
     const { classes } = this.props;
 
     return (
-      <ColumnDiv>
-        <Paper className={classes.root}>
-          <RowDiv>Money: ${this.getMoney().toFixed(2)}</RowDiv>
-          <Tabs
-            value={this.state.value}
-            onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            centered
-          >
-            <Tab label="Potato Farm" value="/potatoFarm" />
-            <Tab label="Store" value="/store" />
-          </Tabs>
-        </Paper>
-      </ColumnDiv>
+      <Paper className={classes.root}>
+        <RowDiv>Money: ${this.getMoney().toFixed(2)}</RowDiv>
+        <Tabs
+          value={this.state.value}
+          onChange={this.handleChange}
+          indicatorColor="primary"
+          centered
+          fullWidth
+        >
+          <Tab label="Potato Farm" value="/potatoFarm" />
+          <Tab label="Store" value="/store" />
+          <Tab label="Inventory" value="/inventory" />
+        </Tabs>
+      </Paper>
     );
   }
 }

@@ -10,6 +10,10 @@ export const Div = styled.div`
 `;
 
 export const FullWidthContainer = styled.div`
+  width: 100%;
+`;
+
+export const FullWidthContainerWithOpacity = styled.div`
   position: fixed;
   left: 0px;
   top: 0px;
@@ -72,3 +76,4 @@ export const Green = styled.span`
   font-size: 15pt;
   ${fontColor};
 `;
+
