@@ -5,7 +5,9 @@ import { MoneyStore } from "../../store/moneyStore";
 import { PotatoFarmStore } from "../../store/potatoFarmStore";
 import { PotatoFarm } from "../potatoFarm/PotatoFarm";
 import { Store } from "../store/Store";
+import { FullWidthContainer } from "../styles/styles";
 import Navigation from "./Navigation";
+import Inventory from "../inventory/Inventory";
 
 const moneyStore = new MoneyStore();
 const potatoFarmStore = new PotatoFarmStore(moneyStore);
@@ -38,17 +40,19 @@ export class App extends React.Component<{}, {}> {
     return (
       <HashRouter>
         <Provider {...stores}>
-          <div>
+          <FullWidthContainer>
             <Navigation />
             <Switch>
               <Route path="/potatoFarm" component={PotatoFarm} />
               <Route path="/store" component={Store} />
+              <Route path="/inventory" component={Inventory} />
 
               <Route component={PotatoFarm} />
             </Switch>
-          </div>
+          </FullWidthContainer>
         </Provider>
       </HashRouter>
     );
   }
 }
+
