@@ -3,16 +3,7 @@ import { inject, observer } from "mobx-react";
 import * as React from "react";
 import { PotatoFarmStoreProps } from "../../store/potatoFarmStore";
 import { ColumnDiv, RowDiv } from "../styles/styles";
-
-export const BuyStyles = theme => ({
-  button: {
-    margin: theme.spacing.unit
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  }
-});
+import { BuyStyles } from "./styles";
 
 interface State {
   quantity: number;

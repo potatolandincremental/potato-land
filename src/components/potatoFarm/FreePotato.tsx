@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { PotatoFarmStoreProps } from "../../store/potatoFarmStore";
 import { ColumnDiv, Div } from "../styles/styles";
 import { Button, WithStyles, withStyles, TextField } from "@material-ui/core";
-import { BuyStyles } from "../store/BuyFarmers";
+import { BuyStyles } from "../store/styles";
 const potatoImg = require("../../images/potato.jpg");
 
 interface State {

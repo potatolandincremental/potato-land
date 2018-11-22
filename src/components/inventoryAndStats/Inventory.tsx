@@ -17,6 +17,7 @@ import { ColumnDiv, RowDiv } from "../styles/styles";
 import { observer, inject } from "mobx-react";
 import { MoneyStore } from "../../store/moneyStore";
 import { PotatoFarmStore } from "../../store/potatoFarmStore";
+import { MerchantStore } from "../../store/merchantStore";
 
 const styles = theme => ({
   root: {
@@ -29,10 +30,12 @@ const styles = theme => ({
 interface Props {
   potatoFarmStore?: PotatoFarmStore;
   moneyStore?: MoneyStore;
+  merchantStore?: MerchantStore;
 }
 
 @inject("potatoFarmStore")
 @inject("moneyStore")
+@inject("merchantStore")
 @observer
 class Inventory extends React.Component<Props & WithStyles<typeof styles>> {
   render() {
@@ -88,6 +91,17 @@ class Inventory extends React.Component<Props & WithStyles<typeof styles>> {
                   secondary={this.props.potatoFarmStore.farmers}
                 />
               </ListItem>
+              {this.props.merchantStore.merchants > 0 ? (
+                <ListItem>
+                  <Avatar>
+                    <BeachAccessIcon />
+                  </Avatar>
+                  <ListItemText
+                    primary="Merchants"
+                    secondary={this.props.merchantStore.merchants}
+                  />
+                </ListItem>
+              ) : null}
             </List>
           </div>
         </Paper>

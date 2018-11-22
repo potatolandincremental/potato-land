@@ -1,14 +1,19 @@
 import { action, observable } from "mobx";
 import _ = require("lodash");
+import { MoneyStore } from "./moneyStore";
 
-export interface merchantStoreProps {
-  merchantStore?: merchantStore;
+export interface MerchantStoreProps {
+  merchantStore?: MerchantStore;
 }
-export class merchantStore {
-  constructor() {
+export class MerchantStore {
+  constructor(private moneyStore: MoneyStore) {
     setInterval(() => {
       this.merchants;
-      const properties = ["merchants", "merchantsPercentPotatoSalePocketed"];
+      const properties = [
+        "merchants",
+        "merchantsPercentPotatoSalePocketed",
+        "merchantSaleRate"
+      ];
       localStorage.setItem("merchantStore", JSON.stringify(this));
       localStorage.setItem(
         "merchantStoreProperties",
@@ -19,13 +24,20 @@ export class merchantStore {
 
   @observable merchants = 0;
 
+  @observable merchantCost = 100; //need to figure this out too...
+
   @observable merchantsPercentPotatoSalePocketed = 0.5; //need to figure out if this is good
 
   @observable merchantSaleRate = 2000; //2s to start, will be able to buy upgrades
 
   @action
-  addMerchants = (quantity: number) => {
-    this.merchants += quantity;
+  buyMerchants = (quantity: number) => {
+    const merchantsToPurchase = Math.min(
+      quantity,
+      Math.floor(this.moneyStore.money / this.merchantCost)
+    );
+    this.merchants += merchantsToPurchase;
+    this.moneyStore.removeMoney(this.merchantCost * merchantsToPurchase);
   };
 
   //   @action

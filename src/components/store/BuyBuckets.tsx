@@ -4,17 +4,16 @@ import * as React from "react";
 import { PotatoFarmStoreProps } from "../../store/potatoFarmStore";
 import { ColumnDiv, RowDiv } from "../styles/styles";
 import { BuyStyles } from "./styles";
-import { MerchantStoreProps } from "../../store/merchantStore";
 
 interface State {
   quantity: number;
 }
 
-interface Props extends MerchantStoreProps, WithStyles<typeof BuyStyles> {}
+interface Props extends PotatoFarmStoreProps, WithStyles<typeof BuyStyles> {}
 
-@inject("merchantStore")
+@inject("potatoFarmStore")
 @observer
-class BuyFarmers extends React.Component<Props, State> {
+class BuyBuckets extends React.Component<Props, State> {
   componentWillMount() {
     this.setState({ quantity: 1 });
   }
@@ -28,7 +27,7 @@ class BuyFarmers extends React.Component<Props, State> {
       <ColumnDiv>
         <TextField
           id="outlined-number"
-          label="Number of Merchants"
+          label="Number of Farmers"
           value={this.state.quantity}
           onChange={this.changeText}
           type="number"
@@ -44,15 +43,15 @@ class BuyFarmers extends React.Component<Props, State> {
           color="primary"
           className={classes.button}
           onClick={() => {
-            this.props.merchantStore.buyMerchants(this.state.quantity);
+            this.props.potatoFarmStore.buyFarmers(this.state.quantity);
           }}
         >
-          Buy {this.state.quantity} Merchants (
-          {this.props.merchantStore.merchantCost.toFixed(2)}/ea)
+          Buy {this.state.quantity} Farmers (
+          {this.props.potatoFarmStore.farmerCost.toFixed(2)}/ea)
         </Button>
       </ColumnDiv>
     );
   }
 }
 
-export default withStyles(BuyStyles)(BuyFarmers);
+export default withStyles(BuyStyles)(BuyBuckets);

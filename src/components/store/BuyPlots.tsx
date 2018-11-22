@@ -3,7 +3,7 @@ import { inject, observer } from "mobx-react";
 import * as React from "react";
 import { PotatoFarmStoreProps } from "../../store/potatoFarmStore";
 import { ColumnDiv } from "../styles/styles";
-import { BuyStyles } from "./BuyFarmers";
+import { BuyStyles } from "./styles";
 
 interface State {
   quantity: number;

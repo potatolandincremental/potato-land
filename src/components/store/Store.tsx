@@ -4,6 +4,8 @@ import { ColumnDiv, RowDiv } from "../styles/styles";
 import BuyFarmers from "./BuyFarmers";
 import BuyPlots from "./BuyPlots";
 import { Paper } from "@material-ui/core";
+import BuyMerchants from "./BuyMerchants";
+import BuyBuckets from "./BuyBuckets";
 
 interface Props {
   potatoFarmStore?: PotatoFarmStore;
@@ -23,10 +25,10 @@ export class Store extends React.Component<Props> {
         </Paper>
         <Paper>
           <ColumnDiv>
-            <BuyPlots />
+            <BuyMerchants />
           </ColumnDiv>
           <ColumnDiv>
-            <BuyFarmers />
+            <BuyBuckets />
           </ColumnDiv>
         </Paper>
       </RowDiv>

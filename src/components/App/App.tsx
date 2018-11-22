@@ -9,15 +9,18 @@ import { FullWidthContainer } from "../styles/styles";
 import Navigation from "./Navigation";
 import InventoryAndStatistics from "../inventoryAndStats/InventoryAndStatistics";
 import { StatisticsStore } from "../../store/statisticsStore";
+import { MerchantStore } from "../../store/merchantStore";
 
 const moneyStore = new MoneyStore();
 const statisticsStore = new StatisticsStore();
 const potatoFarmStore = new PotatoFarmStore(moneyStore, statisticsStore);
+const merchantStore = new MerchantStore(moneyStore);
 
 const stores = {
   potatoFarmStore,
   moneyStore,
-  statisticsStore
+  statisticsStore,
+  merchantStore
 };
 
 const loadStore = (name: string) => {
