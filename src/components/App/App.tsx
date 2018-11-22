@@ -7,14 +7,24 @@ import { PotatoFarm } from "../potatoFarm/PotatoFarm";
 import { Store } from "../store/Store";
 import { FullWidthContainer } from "../styles/styles";
 import Navigation from "./Navigation";
-import Inventory from "../inventory/Inventory";
+import InventoryAndStatistics from "../inventoryAndStats/InventoryAndStatistics";
+import { StatisticsStore } from "../../store/statisticsStore";
+import { MerchantStore } from "../../store/merchantStore";
 
 const moneyStore = new MoneyStore();
-const potatoFarmStore = new PotatoFarmStore(moneyStore);
+const statisticsStore = new StatisticsStore();
+const potatoFarmStore = new PotatoFarmStore(moneyStore, statisticsStore);
+const merchantStore = new MerchantStore(
+  moneyStore,
+  potatoFarmStore,
+  statisticsStore
+);
 
 const stores = {
   potatoFarmStore,
-  moneyStore
+  moneyStore,
+  statisticsStore,
+  merchantStore
 };
 
 const loadStore = (name: string) => {
@@ -35,6 +45,8 @@ export class App extends React.Component<{}, {}> {
     super(props);
     loadStore("potatoFarmStore");
     loadStore("moneyStore");
+    loadStore("statisticsStore");
+    loadStore("merchantStore");
   }
   render() {
     return (
@@ -45,7 +57,10 @@ export class App extends React.Component<{}, {}> {
             <Switch>
               <Route path="/potatoFarm" component={PotatoFarm} />
               <Route path="/store" component={Store} />
-              <Route path="/inventory" component={Inventory} />
+              <Route
+                path="/inventoryAndStatistics"
+                component={InventoryAndStatistics}
+              />
 
               <Route component={PotatoFarm} />
             </Switch>
@@ -55,4 +70,3 @@ export class App extends React.Component<{}, {}> {
     );
   }
 }
-
