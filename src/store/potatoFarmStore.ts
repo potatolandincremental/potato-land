@@ -1,12 +1,16 @@
 import { action, observable } from "mobx";
 import { MoneyStore } from "./moneyStore";
 import _ = require("lodash");
+import { StatisticsStore } from "./statisticsStore";
 
 export interface PotatoFarmStoreProps {
   potatoFarmStore?: PotatoFarmStore;
 }
 export class PotatoFarmStore {
-  constructor(private moneyStore: MoneyStore) {
+  constructor(
+    private moneyStore: MoneyStore,
+    private statisticsStore: StatisticsStore
+  ) {
     this.setPlotTimeout();
     setInterval(() => {
       this.freePotatoes;
@@ -56,7 +60,7 @@ export class PotatoFarmStore {
 
   @observable plotCost = 0.5;
 
-  @observable farmerFieldClearCost = 0.1; //need to adjust after testing... $0.10 per field to clear
+  @observable farmerPlotClearCost = 0.1; //need to adjust after testing... $0.10 per field to clear
 
   @observable farmerCost = 5.0; //cost to purchase a farmer in general
 
@@ -77,6 +81,7 @@ export class PotatoFarmStore {
       return;
     }
 
+    this.statisticsStore.plantPotatoes(potatoesToPlant);
     this.freePotatoes -= potatoesToPlant;
     this.plantedPotatoes += potatoesToPlant;
     this.plotsReady = false;
@@ -190,12 +195,13 @@ export class PotatoFarmStore {
         }
         //if there are farmers, let them harvest if we have enough money
         const maxPlotsCanHarvest = Math.min(
-          Math.floor(this.moneyStore.money / this.farmerFieldClearCost),
+          Math.floor(this.moneyStore.money / this.farmerPlotClearCost),
           this.plantedPotatoes,
           this.farmers
         );
-        const costToHarvest = maxPlotsCanHarvest * this.farmerFieldClearCost;
+        const costToHarvest = maxPlotsCanHarvest * this.farmerPlotClearCost;
 
+        this.statisticsStore.farmersClearCost(costToHarvest);
         this.moneyStore.removeMoney(costToHarvest);
         this.freePotatoes += maxPlotsCanHarvest * this.growthFactor;
         this.plantedPotatoes -= maxPlotsCanHarvest;
@@ -231,20 +237,24 @@ export class PotatoFarmStore {
     if (n > this.freePotatoes) {
       //there are more potatoes than plots
       if (freePlots < this.freePotatoes) {
+        this.statisticsStore.plantPotatoes(freePlots);
         this.mutateFarmState(freePlots);
         return;
       }
       //there are more plots than potatoes
+      this.statisticsStore.plantPotatoes(this.freePotatoes);
       this.mutateFarmState(this.freePotatoes);
       return;
     }
 
     //n is less than or equal to the number of potatoes available
     if (freePlots < n) {
+      this.statisticsStore.plantPotatoes(freePlots);
       this.mutateFarmState(freePlots);
       return;
     }
     //there are more plots than potatoes
+    this.statisticsStore.plantPotatoes(n);
     this.mutateFarmState(n);
     return;
   };

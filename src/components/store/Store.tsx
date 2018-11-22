@@ -1,6 +1,6 @@
 import * as React from "react";
 import { PotatoFarmStore } from "../../store/potatoFarmStore";
-import { ColumnDiv } from "../styles/styles";
+import { ColumnDiv, RowDiv } from "../styles/styles";
 import BuyFarmers from "./BuyFarmers";
 import BuyPlots from "./BuyPlots";
 import { Paper } from "@material-ui/core";
@@ -12,7 +12,7 @@ interface Props {
 export class Store extends React.Component<Props> {
   render() {
     return (
-      <ColumnDiv>
+      <RowDiv>
         <Paper>
           <ColumnDiv>
             <BuyPlots />
@@ -21,7 +21,15 @@ export class Store extends React.Component<Props> {
             <BuyFarmers />
           </ColumnDiv>
         </Paper>
-      </ColumnDiv>
+        <Paper>
+          <ColumnDiv>
+            <BuyPlots />
+          </ColumnDiv>
+          <ColumnDiv>
+            <BuyFarmers />
+          </ColumnDiv>
+        </Paper>
+      </RowDiv>
     );
   }
 }

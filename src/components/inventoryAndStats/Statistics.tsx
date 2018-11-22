@@ -5,16 +5,19 @@ import {
   ListItemText,
   WithStyles,
   withStyles,
-  Paper
+  Paper,
+  Typography,
+  Divider
 } from "@material-ui/core";
 import BeachAccessIcon from "@material-ui/icons/BeachAccess";
 import ImageIcon from "@material-ui/icons/Image";
 import WorkIcon from "@material-ui/icons/Work";
 import React = require("react");
-import { ColumnDiv } from "../styles/styles";
+import { ColumnDiv, RowDiv } from "../styles/styles";
 import { observer, inject } from "mobx-react";
 import { MoneyStore } from "../../store/moneyStore";
 import { PotatoFarmStore } from "../../store/potatoFarmStore";
+import { StatisticsStore } from "../../store/statisticsStore";
 
 const styles = theme => ({
   root: {
@@ -27,61 +30,69 @@ const styles = theme => ({
 interface Props {
   potatoFarmStore?: PotatoFarmStore;
   moneyStore?: MoneyStore;
+  statisticsStore?: StatisticsStore;
 }
 
 @inject("potatoFarmStore")
 @inject("moneyStore")
+@inject("statisticsStore")
 @observer
-class Inventory extends React.Component<Props & WithStyles<typeof styles>> {
+class Statistics extends React.Component<Props & WithStyles<typeof styles>> {
   render() {
     const { classes } = this.props;
     return (
-      <ColumnDiv>
+      <RowDiv>
         <Paper>
           <div className={classes.root}>
+            <ColumnDiv>
+              <Typography variant="h5" component="h3">
+                Statistics
+              </Typography>
+            </ColumnDiv>
+
+            <Divider />
             <List>
               <ListItem>
                 <Avatar>
                   <ImageIcon />
                 </Avatar>
                 <ListItemText
-                  primary="Free Potatoes"
-                  secondary={this.props.potatoFarmStore.freePotatoes}
+                  primary="Farmer cost to clear plot"
+                  secondary={`$${this.props.potatoFarmStore.farmerPlotClearCost.toFixed(
+                    2
+                  )}`}
                 />
               </ListItem>
+              <Divider />
+              <ListItem>
+                <Avatar>
+                  <BeachAccessIcon />
+                </Avatar>
+                <ListItemText
+                  primary="Farmer cost per minute"
+                  secondary={`$${this.props.statisticsStore.farmerPlotClearingCostPerMinute.toFixed(
+                    2
+                  )}`}
+                />
+              </ListItem>
+              <Divider />
               <ListItem>
                 <Avatar>
                   <WorkIcon />
                 </Avatar>
                 <ListItemText
-                  primary="Planted Potatoes"
-                  secondary={this.props.potatoFarmStore.plantedPotatoes}
-                />
-              </ListItem>
-              <ListItem>
-                <Avatar>
-                  <BeachAccessIcon />
-                </Avatar>
-                <ListItemText
-                  primary="Plots"
-                  secondary={this.props.potatoFarmStore.plots}
-                />
-              </ListItem>
-              <ListItem>
-                <Avatar>
-                  <BeachAccessIcon />
-                </Avatar>
-                <ListItemText
-                  primary="Farmers"
-                  secondary={this.props.potatoFarmStore.farmers}
+                  primary="Potatoes planted per minute"
+                  secondary={
+                    this.props.statisticsStore.potatoesPlantedPerMinute.toFixed(2)
+                  }
                 />
               </ListItem>
             </List>
           </div>
         </Paper>
-      </ColumnDiv>
+      </RowDiv>
     );
   }
 }
 
-export default withStyles(styles)(Inventory);
+export default withStyles(styles)(Statistics);
