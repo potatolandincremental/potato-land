@@ -18,7 +18,7 @@ interface Props extends MoneyStoreProps, WithStyles<typeof styles> {
 }
 
 interface State {
-  value: number;
+  value: string;
 }
 
 @inject("moneyStore")
@@ -32,9 +32,9 @@ class Navigation extends React.Component<Props, State> {
     return money;
   };
 
-  state = {
-    value: 0
-  };
+  componentWillMount() {
+    this.setState({ value: '/potatoFarm' });
+  }
 
   handleChange = (event, value) => {
     this.setState({ value });

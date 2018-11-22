@@ -1,6 +1,6 @@
 import { Provider } from "mobx-react";
 import * as React from "react";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 import { MoneyStore } from "../../store/moneyStore";
 import { PotatoFarmStore } from "../../store/potatoFarmStore";
 import { PotatoFarm } from "../potatoFarm/PotatoFarm";
@@ -62,7 +62,7 @@ export class App extends React.Component<{}, {}> {
                 component={InventoryAndStatistics}
               />
 
-              <Route component={PotatoFarm} />
+              <Redirect to={"/potatoFarm"} />
             </Switch>
           </FullWidthContainer>
         </Provider>
