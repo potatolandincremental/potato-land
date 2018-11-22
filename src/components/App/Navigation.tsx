@@ -1,13 +1,9 @@
-import * as React from "react";
-import { ColumnDiv, Div, FullWidthContainer, RowDiv } from "../styles/styles";
-import styled from "styled-components";
-import { typeValue } from "../utils/utils";
-import posed from "react-pose";
-import { MoneyStoreProps } from "../../store/moneyStore";
+import { Paper, Tab, Tabs, WithStyles, withStyles } from "@material-ui/core";
 import { inject, observer } from "mobx-react";
-import { Link, withRouter } from "react-router-dom";
-import { Store } from "../store/Store";
-import { Paper, Tabs, Tab, WithStyles, withStyles } from "@material-ui/core";
+import * as React from "react";
+import { withRouter } from "react-router-dom";
+import { MoneyStoreProps } from "../../store/moneyStore";
+import { ColumnDiv, RowDiv } from "../styles/styles";
 
 const styles = {
   root: {
@@ -54,7 +50,7 @@ class Navigation extends React.Component<Props, State> {
     return (
       <ColumnDiv>
         <Paper className={classes.root}>
-        <RowDiv>Money: ${this.getMoney().toFixed(2)}</RowDiv>
+          <RowDiv>Money: ${this.getMoney().toFixed(2)}</RowDiv>
           <Tabs
             value={this.state.value}
             onChange={this.handleChange}

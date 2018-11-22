@@ -15,7 +15,6 @@ export class PotatoFarm extends React.Component<Props> {
   render() {
     return (
       <ColumnDiv>
-        <RowDiv>Potato Farm</RowDiv>
         <ColumnDiv>
           <RowDiv>Free Potatoes</RowDiv>
           <FreePotato />

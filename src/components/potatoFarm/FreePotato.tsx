@@ -1,8 +1,8 @@
-import * as React from "react";
-import { ColumnDiv, Div, FullWidthContainer, RowDiv } from "../styles/styles";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
+import * as React from "react";
+import styled from "styled-components";
 import { PotatoFarmStoreProps } from "../../store/potatoFarmStore";
+import { ColumnDiv, Div } from "../styles/styles";
 const potatoImg = require("../../images/potato.jpg");
 
 interface State {
