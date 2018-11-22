@@ -1,38 +1,66 @@
-import * as React from "react";
-import { ColumnDiv, Div, FullWidthContainer, RowDiv } from "../styles/styles";
-import styled from "styled-components";
+import { Button, TextField, WithStyles, withStyles } from "@material-ui/core";
 import { inject, observer } from "mobx-react";
+import * as React from "react";
 import { PotatoFarmStoreProps } from "../../store/potatoFarmStore";
-const potatoImg = require("../../images/potato.jpg");
+import { ColumnDiv, RowDiv } from "../styles/styles";
+
+export const BuyStyles = theme => ({
+  button: {
+    margin: theme.spacing.unit
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit
+  }
+});
 
 interface State {
   quantity: number;
 }
 
+interface Props extends PotatoFarmStoreProps, WithStyles<typeof BuyStyles> {}
+
 @inject("potatoFarmStore")
 @observer
-export class BuyFarmers extends React.Component<PotatoFarmStoreProps, State> {
+class BuyFarmers extends React.Component<Props, State> {
   componentWillMount() {
     this.setState({ quantity: 1 });
   }
   changeText = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ quantity: parseInt(e.currentTarget.value) });
   };
+
   render() {
+    const { classes } = this.props;
     return (
       <ColumnDiv>
-        <RowDiv>Farmers</RowDiv>
-        <button
+        <TextField
+          id="outlined-number"
+          label="Number of Farmers"
+          value={this.state.quantity}
+          onChange={this.changeText}
+          type="number"
+          className={classes.textField}
+          InputLabelProps={{
+            shrink: true
+          }}
+          margin="normal"
+          variant="outlined"
+        />
+        <Button
+          variant="outlined"
+          color="primary"
+          className={classes.button}
           onClick={() => {
             this.props.potatoFarmStore.buyFarmers(this.state.quantity);
           }}
         >
           Buy {this.state.quantity} Farmers (
           {this.props.potatoFarmStore.farmerCost.toFixed(2)}/ea)
-        </button>
-        Number to buy:
-        <input type="text" onChange={this.changeText} />
+        </Button>
       </ColumnDiv>
     );
   }
 }
+
+export default withStyles(BuyStyles)(BuyFarmers);

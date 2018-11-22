@@ -1,9 +1,6 @@
+import { action, observable } from "mobx";
 import { MoneyStore } from "./moneyStore";
-import { action, computed, observable, extendObservable, autorun } from "mobx";
-import { typeValue, Type } from "../components/utils/utils";
-import { createGUID } from "../utilities/Guid";
 import _ = require("lodash");
-import { autoSave } from "./common";
 
 export interface PotatoFarmStoreProps {
   potatoFarmStore?: PotatoFarmStore;

@@ -1,9 +1,9 @@
-import * as React from "react";
-import { ColumnDiv, Div, FullWidthContainer, RowDiv } from "../styles/styles";
-import styled from "styled-components";
+import { Button, TextField, WithStyles, withStyles } from "@material-ui/core";
 import { inject, observer } from "mobx-react";
+import * as React from "react";
 import { PotatoFarmStoreProps } from "../../store/potatoFarmStore";
-const potatoImg = require("../../images/potato.jpg");
+import { ColumnDiv } from "../styles/styles";
+import { BuyStyles } from "./BuyFarmers";
 
 interface State {
   quantity: number;
@@ -11,7 +11,10 @@ interface State {
 
 @inject("potatoFarmStore")
 @observer
-export class BuyPlots extends React.Component<PotatoFarmStoreProps, State> {
+class BuyPlots extends React.Component<
+  PotatoFarmStoreProps & WithStyles<typeof BuyStyles>,
+  State
+> {
   componentWillMount() {
     this.setState({ quantity: 1 });
   }
@@ -19,20 +22,36 @@ export class BuyPlots extends React.Component<PotatoFarmStoreProps, State> {
     this.setState({ quantity: parseInt(e.currentTarget.value) });
   };
   render() {
+    const { classes } = this.props;
     return (
       <ColumnDiv>
-        <RowDiv>Potato Plots</RowDiv>
-        <button
+        <TextField
+          id="outlined-number"
+          label="Number of Plots"
+          value={this.state.quantity}
+          onChange={this.changeText}
+          type="number"
+          className={classes.textField}
+          InputLabelProps={{
+            shrink: true
+          }}
+          margin="normal"
+          variant="outlined"
+        />
+        <Button
+          variant="outlined"
+          color="primary"
+          className={classes.button}
           onClick={() => {
             this.props.potatoFarmStore.buyPlots(this.state.quantity);
           }}
         >
-          Buy {this.state.quantity} Plots (
-          {this.props.potatoFarmStore.plotCost.toFixed(2)}/ea)
-        </button>
-        Number to buy:
-        <input type="text" onChange={this.changeText} />
+          Buy {this.state.quantity} Farmers (
+          {this.props.potatoFarmStore.farmerCost.toFixed(2)}/ea)
+        </Button>
       </ColumnDiv>
     );
   }
 }
+
+export default withStyles(BuyStyles)(BuyPlots);

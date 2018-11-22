@@ -1,4 +1,4 @@
-import { runInAction, autorun, extendObservable, toJS } from "mobx";
+import { autorun, extendObservable, toJS } from "mobx";
 
 let firstRun = true;
 export function autoSave(store, name: string, exec: () => void) {

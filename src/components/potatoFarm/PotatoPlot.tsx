@@ -1,11 +1,8 @@
+import { inject, observer } from "mobx-react";
 import * as React from "react";
-import { ColumnDiv, Div, FullWidthContainer, RowDiv } from "../styles/styles";
 import styled from "styled-components";
-import { typeValue } from "../utils/utils";
-import posed from "react-pose";
-import { observer, inject } from "mobx-react";
-import { FreePotato } from "./FreePotato";
 import { PotatoFarmStoreProps } from "../../store/potatoFarmStore";
+import { Div } from "../styles/styles";
 
 interface State {
   quantity: number;

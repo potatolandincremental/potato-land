@@ -1,11 +1,11 @@
-import * as React from "react";
 import { Provider } from "mobx-react";
-import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
-import { PotatoFarm } from "../potatoFarm/PotatoFarm";
-import { PotatoFarmStore } from "../../store/potatoFarmStore";
-import { Navigation } from "./Navigation";
+import * as React from "react";
+import { HashRouter, Route, Switch } from "react-router-dom";
 import { MoneyStore } from "../../store/moneyStore";
+import { PotatoFarmStore } from "../../store/potatoFarmStore";
+import { PotatoFarm } from "../potatoFarm/PotatoFarm";
 import { Store } from "../store/Store";
+import Navigation from "./Navigation";
 
 const moneyStore = new MoneyStore();
 const potatoFarmStore = new PotatoFarmStore(moneyStore);
