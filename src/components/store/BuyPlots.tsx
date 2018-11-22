@@ -46,8 +46,8 @@ class BuyPlots extends React.Component<
             this.props.potatoFarmStore.buyPlots(this.state.quantity);
           }}
         >
-          Buy {this.state.quantity} Farmers (
-          {this.props.potatoFarmStore.farmerCost.toFixed(2)}/ea)
+          Buy {this.state.quantity} Plots (
+          {this.props.potatoFarmStore.plotCost.toFixed(2)}/ea)
         </Button>
       </ColumnDiv>
     );
