@@ -3,7 +3,7 @@ import { Provider } from "mobx-react";
 import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
 import { PotatoFarm } from "../potatoFarm/PotatoFarm";
 import { PotatoFarmStore } from "../../store/potatoFarmStore";
-import { Navigation } from "./Navigation";
+import Navigation from "./Navigation";
 import { MoneyStore } from "../../store/moneyStore";
 import { Store } from "../store/Store";
 
