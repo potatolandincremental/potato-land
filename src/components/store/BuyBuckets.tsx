@@ -27,7 +27,7 @@ class BuyBuckets extends React.Component<Props, State> {
       <ColumnDiv>
         <TextField
           id="outlined-number"
-          label="Number of Farmers"
+          label="Number of Buckets"
           value={this.state.quantity}
           onChange={this.changeText}
           type="number"
@@ -43,10 +43,10 @@ class BuyBuckets extends React.Component<Props, State> {
           color="primary"
           className={classes.button}
           onClick={() => {
-            this.props.potatoFarmStore.buyFarmers(this.state.quantity);
+            // this.props.potatoFarmStore.buyFarmers(this.state.quantity);
           }}
         >
-          Buy {this.state.quantity} Farmers (
+          Buy {this.state.quantity} Buckets (
           {this.props.potatoFarmStore.farmerCost.toFixed(2)}/ea)
         </Button>
       </ColumnDiv>

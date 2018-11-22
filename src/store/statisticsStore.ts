@@ -27,7 +27,7 @@ export class StatisticsStore {
     }, 10000);
 
     //set interval to update statistics
-    const interval = 10000;
+    const interval = 20000;
     setInterval(() => {
       this.potatoesPlantedPerMinute =
         (this.potatoesPlantedSinceLastInterval / interval) * 60000;
