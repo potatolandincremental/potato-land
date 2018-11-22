@@ -48,8 +48,9 @@ class BuyFarmers extends React.Component<Props, State> {
           variant="outlined"
         />
         <Button
-          variant="contained"
+          variant="outlined"
           color="primary"
+          className={classes.button}
           onClick={() => {
             this.props.potatoFarmStore.buyFarmers(this.state.quantity);
           }}
