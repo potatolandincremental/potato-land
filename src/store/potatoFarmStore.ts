@@ -172,6 +172,7 @@ export class PotatoFarmStore {
     if (n > this.plantedPotatoes) {
       const quantity = -this.growthFactor * this.plantedPotatoes;
       this.mutateFarmState(quantity);
+      this.statisticsStore.harvestPotatoes(-quantity);
       this.plantedPotatoes = currentPlantedPotatoes - quantity;
       return;
     }
@@ -180,6 +181,7 @@ export class PotatoFarmStore {
 
     const quantity = -this.growthFactor * n;
     this.mutateFarmState(quantity);
+    this.statisticsStore.harvestPotatoes(-quantity);
     this.plantedPotatoes = currentPlantedPotatoes - n;
     return;
   };
@@ -200,7 +202,9 @@ export class PotatoFarmStore {
           this.farmers
         );
         const costToHarvest = maxPlotsCanHarvest * this.farmerPlotClearCost;
-
+        this.statisticsStore.harvestPotatoes(
+          maxPlotsCanHarvest * this.growthFactor
+        );
         this.statisticsStore.farmersClearCost(costToHarvest);
         this.moneyStore.removeMoney(costToHarvest);
         this.freePotatoes += maxPlotsCanHarvest * this.growthFactor;

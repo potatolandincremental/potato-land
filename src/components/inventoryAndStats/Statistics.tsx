@@ -82,9 +82,21 @@ class Statistics extends React.Component<Props & WithStyles<typeof styles>> {
                 </Avatar>
                 <ListItemText
                   primary="Potatoes planted per minute"
-                  secondary={
-                    this.props.statisticsStore.potatoesPlantedPerMinute.toFixed(2)
-                  }
+                  secondary={this.props.statisticsStore.potatoesPlantedPerMinute.toFixed(
+                    2
+                  )}
+                />
+              </ListItem>
+
+              <ListItem>
+                <Avatar>
+                  <WorkIcon />
+                </Avatar>
+                <ListItemText
+                  primary="Potatoes harvested per minute"
+                  secondary={this.props.statisticsStore.potatoesHarvestedPerMinute.toFixed(
+                    2
+                  )}
                 />
               </ListItem>
             </List>
