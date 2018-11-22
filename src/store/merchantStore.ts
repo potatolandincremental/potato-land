@@ -1,8 +1,8 @@
 import { action, observable } from "mobx";
-import _ = require("lodash");
 import { MoneyStore } from "./moneyStore";
 import { PotatoFarmStore } from "./potatoFarmStore";
 import { StatisticsStore } from "./statisticsStore";
+import _ = require("lodash");
 
 export interface MerchantStoreProps {
   merchantStore?: MerchantStore;
@@ -34,11 +34,19 @@ export class MerchantStore {
       );
       this.potatoFarmStore.freePotatoes -= potatoesToSell;
       this.statisticsStore.sellPotatoes(potatoesToSell);
-      this.moneyStore.addMoney(
+      const profit =
         this.potatoFarmStore.potatoCost *
-          potatoesToSell *
-          (1 - this.merchantsPercentPotatoSalePocketed)
-      );
+        potatoesToSell *
+        (1 - this.merchantsPercentPotatoSalePocketed);
+
+      const merchantCost =
+        this.potatoFarmStore.potatoCost *
+        potatoesToSell *
+        this.merchantsPercentPotatoSalePocketed;
+
+      this.statisticsStore.sellPotatoesMoney(profit);
+      this.statisticsStore.addMerchantCost(merchantCost);
+      this.moneyStore.addMoney(profit);
     }, this.merchantSaleRate);
   }
 

@@ -1,7 +1,7 @@
 import { action, observable } from "mobx";
 import { MoneyStore } from "./moneyStore";
-import _ = require("lodash");
 import { StatisticsStore } from "./statisticsStore";
+import _ = require("lodash");
 
 export interface PotatoFarmStoreProps {
   potatoFarmStore?: PotatoFarmStore;
@@ -154,12 +154,16 @@ export class PotatoFarmStore {
       this.freePotatoes -= this.freePotatoes;
       this.moneyStore.addMoney(this.potatoCost * this.freePotatoes);
       this.statisticsStore.sellPotatoes(this.freePotatoes);
+      this.statisticsStore.sellPotatoesMoney(
+        this.freePotatoes * this.potatoCost
+      );
       return;
     }
 
     this.freePotatoes -= n;
     this.moneyStore.addMoney(this.potatoCost * n);
     this.statisticsStore.sellPotatoes(n);
+    this.statisticsStore.sellPotatoes(n * this.potatoCost);
     return;
   };
 

@@ -1,5 +1,4 @@
-import { PotatoFarmStore } from './potatoFarmStore';
-import { action, observable, computed } from "mobx";
+import { action, observable } from "mobx";
 import _ = require("lodash");
 
 export interface StatisticsStoreProps {
@@ -32,17 +31,28 @@ export class StatisticsStore {
     setInterval(() => {
       this.potatoesPlantedPerMinute =
         (this.potatoesPlantedSinceLastInterval / interval) * 60000;
+
       this.potatoesHarvestedPerMinute =
         (this.potatoesHarvestedSinceLastInterval / interval) * 60000;
 
       this.potatoesSoldPerMinute =
         (this.potatoesSoldSinceLastInterval / interval) * 60000;
+
+      this.potatoesMoneySoldPerMinute =
+        (this.potatoesMoneySoldSinceLastInterval / interval) * 60000;
+
       this.farmerPlotClearingCostPerMinute =
         (this.farmersCostSinceLastInterval / interval) * 60000;
+
+      this.merchantCostPerMinute =
+        (this.merchantCostSinceLastInterval / interval) * 60000;
 
       this.potatoesPlantedSinceLastInterval = 0;
       this.farmersCostSinceLastInterval = 0;
       this.potatoesHarvestedSinceLastInterval = 0;
+      this.potatoesSoldSinceLastInterval = 0;
+      this.potatoesMoneySoldSinceLastInterval = 0;
+      this.merchantCostSinceLastInterval = 0;
     }, interval);
   }
 
@@ -55,8 +65,14 @@ export class StatisticsStore {
   @observable potatoesSoldPerMinute = 0;
   private potatoesSoldSinceLastInterval = 0;
 
+  @observable potatoesMoneySoldPerMinute = 0;
+  private potatoesMoneySoldSinceLastInterval = 0;
+
   @observable farmerPlotClearingCostPerMinute = 0;
   private farmersCostSinceLastInterval = 0;
+
+  @observable merchantCostPerMinute = 0;
+  private merchantCostSinceLastInterval = 0;
 
   @action
   plantPotatoes = (n: number) => {
@@ -69,6 +85,11 @@ export class StatisticsStore {
   };
 
   @action
+  sellPotatoesMoney = (n: number) => {
+    this.potatoesMoneySoldSinceLastInterval += n;
+  };
+
+  @action
   farmersClearCost = (n: number) => {
     this.farmersCostSinceLastInterval += n;
   };
@@ -77,4 +98,23 @@ export class StatisticsStore {
   harvestPotatoes = (n: number) => {
     this.potatoesHarvestedSinceLastInterval += n;
   };
+
+  @action
+  addMerchantCost = (n: number) => {
+    this.merchantCostSinceLastInterval += n;
+  };
+
+  // getTotalValue = (arr: Array<number>) => {
+  //   const maxArrElements = 60;
+  //   const numElements = arr.length;
+  //   const numerator = _.reduce(
+  //     arr,
+  //     (acc, val) => {
+  //       return (acc += val);
+  //     },
+  //     0
+  //   );
+
+  //   return numerator / numElements;
+  // };
 }

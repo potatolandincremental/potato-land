@@ -87,7 +87,7 @@ class Statistics extends React.Component<Props & WithStyles<typeof styles>> {
                   )}
                 />
               </ListItem>
-
+              <Divider />
               <ListItem>
                 <Avatar>
                   <WorkIcon />
@@ -99,6 +99,7 @@ class Statistics extends React.Component<Props & WithStyles<typeof styles>> {
                   )}
                 />
               </ListItem>
+              <Divider />
               <ListItem>
                 <Avatar>
                   <WorkIcon />
@@ -110,7 +111,8 @@ class Statistics extends React.Component<Props & WithStyles<typeof styles>> {
                   )}
                 />
               </ListItem>
-              {/* <ListItem>
+              <Divider />
+              <ListItem>
                 <Avatar>
                   <WorkIcon />
                 </Avatar>
@@ -120,7 +122,19 @@ class Statistics extends React.Component<Props & WithStyles<typeof styles>> {
                     2
                   )}`}
                 />
-              </ListItem> */}
+              </ListItem>
+              <Divider />
+              <ListItem>
+                <Avatar>
+                  <WorkIcon />
+                </Avatar>
+                <ListItemText
+                  primary="Merchant fees per minute"
+                  secondary={`$${this.props.statisticsStore.merchantCostPerMinute.toFixed(
+                    2
+                  )}`}
+                />
+              </ListItem>
             </List>
           </div>
         </Paper>
