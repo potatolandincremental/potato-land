@@ -153,11 +153,13 @@ export class PotatoFarmStore {
     if (n > this.freePotatoes) {
       this.freePotatoes -= this.freePotatoes;
       this.moneyStore.addMoney(this.potatoCost * this.freePotatoes);
+      this.statisticsStore.sellPotatoes(this.freePotatoes);
       return;
     }
 
     this.freePotatoes -= n;
     this.moneyStore.addMoney(this.potatoCost * n);
+    this.statisticsStore.sellPotatoes(n);
     return;
   };
 

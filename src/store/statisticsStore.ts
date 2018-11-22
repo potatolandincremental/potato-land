@@ -1,3 +1,4 @@
+import { PotatoFarmStore } from './potatoFarmStore';
 import { action, observable, computed } from "mobx";
 import _ = require("lodash");
 
@@ -33,6 +34,9 @@ export class StatisticsStore {
         (this.potatoesPlantedSinceLastInterval / interval) * 60000;
       this.potatoesHarvestedPerMinute =
         (this.potatoesHarvestedSinceLastInterval / interval) * 60000;
+
+      this.potatoesSoldPerMinute =
+        (this.potatoesSoldSinceLastInterval / interval) * 60000;
       this.farmerPlotClearingCostPerMinute =
         (this.farmersCostSinceLastInterval / interval) * 60000;
 
@@ -48,12 +52,20 @@ export class StatisticsStore {
   @observable potatoesHarvestedPerMinute = 0;
   private potatoesHarvestedSinceLastInterval = 0;
 
+  @observable potatoesSoldPerMinute = 0;
+  private potatoesSoldSinceLastInterval = 0;
+
   @observable farmerPlotClearingCostPerMinute = 0;
   private farmersCostSinceLastInterval = 0;
 
   @action
   plantPotatoes = (n: number) => {
     this.potatoesPlantedSinceLastInterval += n;
+  };
+
+  @action
+  sellPotatoes = (n: number) => {
+    this.potatoesSoldSinceLastInterval += n;
   };
 
   @action

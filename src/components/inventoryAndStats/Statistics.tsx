@@ -99,6 +99,28 @@ class Statistics extends React.Component<Props & WithStyles<typeof styles>> {
                   )}
                 />
               </ListItem>
+              <ListItem>
+                <Avatar>
+                  <WorkIcon />
+                </Avatar>
+                <ListItemText
+                  primary="Potatoes sold per minute"
+                  secondary={this.props.statisticsStore.potatoesSoldPerMinute.toFixed(
+                    2
+                  )}
+                />
+              </ListItem>
+              {/* <ListItem>
+                <Avatar>
+                  <WorkIcon />
+                </Avatar>
+                <ListItemText
+                  primary="Money generated from potatoes sold per minute"
+                  secondary={`$${this.props.statisticsStore.potatoesMoneySoldPerMinute.toFixed(
+                    2
+                  )}`}
+                />
+              </ListItem> */}
             </List>
           </div>
         </Paper>

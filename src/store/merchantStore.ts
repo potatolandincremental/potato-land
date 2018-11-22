@@ -1,12 +1,18 @@
 import { action, observable } from "mobx";
 import _ = require("lodash");
 import { MoneyStore } from "./moneyStore";
+import { PotatoFarmStore } from "./potatoFarmStore";
+import { StatisticsStore } from "./statisticsStore";
 
 export interface MerchantStoreProps {
   merchantStore?: MerchantStore;
 }
 export class MerchantStore {
-  constructor(private moneyStore: MoneyStore) {
+  constructor(
+    private moneyStore: MoneyStore,
+    private potatoFarmStore: PotatoFarmStore,
+    private statisticsStore: StatisticsStore
+  ) {
     setInterval(() => {
       this.merchants;
       const properties = [
@@ -20,6 +26,20 @@ export class MerchantStore {
         JSON.stringify(properties)
       );
     }, 10000);
+
+    setInterval(() => {
+      const potatoesToSell = Math.min(
+        this.potatoFarmStore.freePotatoes - 2,
+        this.potatoesSoldPerMerchant * this.merchants
+      );
+      this.potatoFarmStore.freePotatoes -= potatoesToSell;
+      this.statisticsStore.sellPotatoes(potatoesToSell);
+      this.moneyStore.addMoney(
+        this.potatoFarmStore.potatoCost *
+          potatoesToSell *
+          (1 - this.merchantsPercentPotatoSalePocketed)
+      );
+    }, this.merchantSaleRate);
   }
 
   @observable merchants = 0;
@@ -28,7 +48,9 @@ export class MerchantStore {
 
   @observable merchantsPercentPotatoSalePocketed = 0.5; //need to figure out if this is good
 
-  @observable merchantSaleRate = 2000; //2s to start, will be able to buy upgrades
+  @observable potatoesSoldPerMerchant = 5;
+
+  @observable merchantSaleRate = 1000; //1s to start, will be able to buy upgrades
 
   @action
   buyMerchants = (quantity: number) => {

@@ -14,7 +14,11 @@ import { MerchantStore } from "../../store/merchantStore";
 const moneyStore = new MoneyStore();
 const statisticsStore = new StatisticsStore();
 const potatoFarmStore = new PotatoFarmStore(moneyStore, statisticsStore);
-const merchantStore = new MerchantStore(moneyStore);
+const merchantStore = new MerchantStore(
+  moneyStore,
+  potatoFarmStore,
+  statisticsStore
+);
 
 const stores = {
   potatoFarmStore,
@@ -41,6 +45,8 @@ export class App extends React.Component<{}, {}> {
     super(props);
     loadStore("potatoFarmStore");
     loadStore("moneyStore");
+    loadStore("statisticsStore");
+    loadStore("merchantStore");
   }
   render() {
     return (
