@@ -6,6 +6,10 @@ import { ColumnDiv, RowDiv } from "../styles/styles";
 import { BuyStyles } from "./styles";
 import { MerchantStoreProps } from "../../store/merchantStore";
 import { StoreStoreProps } from "../../store/storeStore";
+import InfoIcon from '@material-ui/icons/Info';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
+
 
 interface State {
   quantity: number;
@@ -34,6 +38,11 @@ class BuyFarmers extends React.Component<Props & StoreStoreProps, State> {
     const { classes } = this.props;
     return (
       <ColumnDiv>
+       <Tooltip title={`${this.props.merchantStore.potatoesSoldPerMerchant} potatoes sold per merchant per ${this.props.merchantStore.merchantSaleRate/1000}s, each merchant takes ${this.props.merchantStore.merchantsPercentPotatoSalePocketed*100}% of their own potato profits`} placement="left">
+        <IconButton>
+          <InfoIcon />
+        </IconButton>
+      </Tooltip>
         <TextField
           id="outlined-number"
           label="Number of Merchants"

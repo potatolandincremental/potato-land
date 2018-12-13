@@ -5,6 +5,9 @@ import { PotatoFarmStoreProps } from "../../store/potatoFarmStore";
 import { ColumnDiv } from "../styles/styles";
 import { BuyStyles } from "./styles";
 import { StoreStoreProps } from "../../store/storeStore";
+import InfoIcon from '@material-ui/icons/Info';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 
 interface State {
   quantity: number;
@@ -33,6 +36,11 @@ class BuyPlots extends React.Component<
     const { classes } = this.props;
     return (
       <ColumnDiv>
+       <Tooltip title={`1 potato may be planted per plot, returning ${this.props.potatoFarmStore.growthFactor} potatoes when harvested`} placement="left">
+        <IconButton>
+          <InfoIcon />
+        </IconButton>
+      </Tooltip>
         <TextField
           id="outlined-number"
           label="Number of Plots"
