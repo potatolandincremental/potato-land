@@ -18,6 +18,9 @@ import { observer, inject } from "mobx-react";
 import { MoneyStore } from "../../store/moneyStore";
 import { PotatoFarmStore } from "../../store/potatoFarmStore";
 import { StatisticsStore } from "../../store/statisticsStore";
+import InfoIcon from "@material-ui/icons/Info";
+import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const styles = theme => ({
   root: {
@@ -47,6 +50,11 @@ class Statistics extends React.Component<Props & WithStyles<typeof styles>> {
             <ColumnDiv>
               <Typography variant="h5" component="h3">
                 Statistics
+                <Tooltip title="A sliding window average per every 30s" placement="right">
+                  <IconButton>
+                    <InfoIcon />
+                  </IconButton>
+                </Tooltip>
               </Typography>
             </ColumnDiv>
 

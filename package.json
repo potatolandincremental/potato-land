@@ -1,15 +1,11 @@
 {
   "name": "test",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "thumbnail": "",
   "main": "test.js",
   "scripts": {
-    "server": "cd server && ts-node Server.ts",
     "build": "rm -R docs && webpack --display-error-details",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --port 4200",
-    "types": "ts-node src/store/test",
-    "generate": "generate protos src/generated"
+    "dev": "webpack-dev-server --port 4200"
   },
   "author": "Adam Costanza",
   "license": "ISC",
