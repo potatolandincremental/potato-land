@@ -38,7 +38,7 @@ class BuyFarmers extends React.Component<Props & StoreStoreProps, State> {
     const { classes } = this.props;
     return (
       <ColumnDiv>
-       <Tooltip title={`${this.props.merchantStore.potatoesSoldPerMerchant} potatoes sold per merchant per ${this.props.merchantStore.merchantSaleRate/1000}s, each merchant takes ${this.props.merchantStore.merchantsPercentPotatoSalePocketed*100}% of their own potato profits`} placement="left">
+       <Tooltip title={`${this.props.merchantStore.potatoesSoldPerMerchant} potatoes sold per merchant per ${this.props.merchantStore.merchantSaleRate/1000}s, each merchant takes ${this.props.merchantStore.merchantsPercentPotatoSalePocketedv2*100}% of their own potato profits`} placement="left">
         <IconButton>
           <InfoIcon />
         </IconButton>

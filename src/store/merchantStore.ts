@@ -17,7 +17,6 @@ export class MerchantStore {
       this.merchants;
       const properties = [
         "merchants",
-        "merchantsPercentPotatoSalePocketed",
         "merchantSaleRate"
       ];
       localStorage.setItem("merchantStore", JSON.stringify(this));
@@ -37,12 +36,12 @@ export class MerchantStore {
       const profit =
         this.potatoFarmStore.potatoCost *
         potatoesToSell *
-        (1 - this.merchantsPercentPotatoSalePocketed);
+        (1 - this.merchantsPercentPotatoSalePocketedv2);
 
       const merchantCost =
         this.potatoFarmStore.potatoCost *
         potatoesToSell *
-        this.merchantsPercentPotatoSalePocketed;
+        this.merchantsPercentPotatoSalePocketedv2;
 
       this.statisticsStore.sellPotatoesMoney(profit);
       this.statisticsStore.addMerchantCost(merchantCost);
@@ -54,7 +53,8 @@ export class MerchantStore {
 
   @observable merchantCost = 100; //need to figure this out too...
 
-  @observable merchantsPercentPotatoSalePocketed = 0.5; //need to figure out if this is good
+  @observable merchantsPercentPotatoSalePocketedv2 = 0.25; //need to figure out if this is good
+  //rename so it won't use saved version
 
   @observable potatoesSoldPerMerchant = 5;
 
