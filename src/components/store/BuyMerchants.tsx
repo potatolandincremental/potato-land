@@ -5,6 +5,7 @@ import { PotatoFarmStoreProps } from "../../store/potatoFarmStore";
 import { ColumnDiv, RowDiv } from "../styles/styles";
 import { BuyStyles } from "./styles";
 import { MerchantStoreProps } from "../../store/merchantStore";
+import { StoreStoreProps } from "../../store/storeStore";
 
 interface State {
   quantity: number;
@@ -13,13 +14,20 @@ interface State {
 interface Props extends MerchantStoreProps, WithStyles<typeof BuyStyles> {}
 
 @inject("merchantStore")
+@inject("storeStore")
 @observer
-class BuyFarmers extends React.Component<Props, State> {
+class BuyFarmers extends React.Component<Props & StoreStoreProps, State> {
   componentWillMount() {
-    this.setState({ quantity: 1 });
+    const quantity = this.props.storeStore.quantities.merchants;
+    this.setState({ quantity });
   }
   changeText = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ quantity: parseInt(e.currentTarget.value) });
+    const quantity = this.props.storeStore.setString(
+      "merchants",
+      e.currentTarget.value
+    );
+
+    this.setState({ quantity });
   };
 
   render() {

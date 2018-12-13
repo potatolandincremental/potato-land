@@ -59,7 +59,6 @@ class Navigation extends React.Component<Props, State> {
         >
           <Tab label="Potato Farm" value="/potatoFarm" />
           <Tab label="Store" value="/store" />
-          <Tab label="Inventory & Statistics" value="/inventoryAndStatistics" />
         </Tabs>
       </Paper>
     );

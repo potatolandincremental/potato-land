@@ -4,22 +4,30 @@ import * as React from "react";
 import { PotatoFarmStoreProps } from "../../store/potatoFarmStore";
 import { ColumnDiv } from "../styles/styles";
 import { BuyStyles } from "./styles";
+import { StoreStoreProps } from "../../store/storeStore";
 
 interface State {
   quantity: number;
 }
 
 @inject("potatoFarmStore")
+@inject("storeStore")
 @observer
 class BuyPlots extends React.Component<
-  PotatoFarmStoreProps & WithStyles<typeof BuyStyles>,
+  StoreStoreProps & PotatoFarmStoreProps & WithStyles<typeof BuyStyles>,
   State
 > {
   componentWillMount() {
-    this.setState({ quantity: 1 });
+    const quantity = this.props.storeStore.quantities.plots;
+    this.setState({ quantity });
   }
   changeText = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ quantity: parseInt(e.currentTarget.value) });
+    const quantity = this.props.storeStore.setString(
+      "plots",
+      e.currentTarget.value
+    );
+
+    this.setState({ quantity });
   };
   render() {
     const { classes } = this.props;

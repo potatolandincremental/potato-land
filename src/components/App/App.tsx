@@ -10,6 +10,7 @@ import Navigation from "./Navigation";
 import InventoryAndStatistics from "../inventoryAndStats/InventoryAndStatistics";
 import { StatisticsStore } from "../../store/statisticsStore";
 import { MerchantStore } from "../../store/merchantStore";
+import { StoreStore } from "../../store/storeStore";
 
 const moneyStore = new MoneyStore();
 const statisticsStore = new StatisticsStore();
@@ -19,12 +20,14 @@ const merchantStore = new MerchantStore(
   potatoFarmStore,
   statisticsStore
 );
+const storeStore = new StoreStore();
 
 const stores = {
   potatoFarmStore,
   moneyStore,
   statisticsStore,
-  merchantStore
+  merchantStore,
+  storeStore
 };
 
 const loadStore = (name: string) => {
@@ -47,6 +50,7 @@ export class App extends React.Component<{}, {}> {
     loadStore("moneyStore");
     loadStore("statisticsStore");
     loadStore("merchantStore");
+    loadStore("storeStore");
   }
   render() {
     return (

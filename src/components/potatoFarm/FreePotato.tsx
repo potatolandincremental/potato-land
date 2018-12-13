@@ -21,7 +21,14 @@ class FreePotato extends React.Component<
     this.setState({ quantity: 1 });
   }
   changeText = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ quantity: parseInt(e.currentTarget.value) });
+    if (e.currentTarget.value == "") {
+      return;
+    }
+    this.setState({ quantity: parseInt(e.currentTarget.value) }, () => {
+      if (this.state.quantity < 0) {
+        this.setState({ quantity: 0 });
+      }
+    });
   };
   render() {
     const { classes } = this.props;

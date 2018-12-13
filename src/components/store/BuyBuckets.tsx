@@ -4,6 +4,7 @@ import * as React from "react";
 import { PotatoFarmStoreProps } from "../../store/potatoFarmStore";
 import { ColumnDiv, RowDiv } from "../styles/styles";
 import { BuyStyles } from "./styles";
+import { StoreStoreProps } from "../../store/storeStore";
 
 interface State {
   quantity: number;
@@ -12,13 +13,20 @@ interface State {
 interface Props extends PotatoFarmStoreProps, WithStyles<typeof BuyStyles> {}
 
 @inject("potatoFarmStore")
+@inject("storeStore")
 @observer
-class BuyBuckets extends React.Component<Props, State> {
+class BuyBuckets extends React.Component<Props & StoreStoreProps, State> {
   componentWillMount() {
-    this.setState({ quantity: 1 });
+    const quantity = this.props.storeStore.quantities.buckets;
+    this.setState({ quantity });
   }
   changeText = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ quantity: parseInt(e.currentTarget.value) });
+    const quantity = this.props.storeStore.setString(
+      "buckets",
+      e.currentTarget.value
+    );
+
+    this.setState({ quantity });
   };
 
   render() {
