@@ -7,5 +7,6 @@
 - Inventory and statistics are now on the same page
 - Merchants only take 25% of potato sales profits rather than 50% now
 - Information regarding statistics
+- Numbers aren't lost from the store when you change tabs
 
 You meant to go here https://potatolandincremental.github.io/potato-land/index.html
