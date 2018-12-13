@@ -10,42 +10,36 @@ interface State {
 
 @inject("potatoFarmStore")
 @observer
-export class PotatoPlot extends React.Component<PotatoFarmStoreProps, State> {
-  count = () => {
-    return (
-      <CountDiv>{`${this.props.potatoFarmStore.plantedPotatoes}/${
-        this.props.potatoFarmStore.plots
-      }`}</CountDiv>
-    );
+export class PotatoPlotIndividual extends React.Component<PotatoFarmStoreProps, State> {
+  plots = () => {
+    // console.log(this.props.potatoFarmStore.plantedPotatoes);
+    return [...Array(this.props.potatoFarmStore.plots).keys()].map(i => {
+      return this.props.potatoFarmStore.plantedPotatoes > i ? (
+        this.props.potatoFarmStore.plotsReady ? (
+          <FilledPlotReady
+            key={i}
+            onClick={() =>
+              this.props.potatoFarmStore.harvestPlots(
+                this.props.potatoFarmStore.plantedPotatoes
+              )
+            }
+          />
+        ) : (
+          <FilledPlot key={i} />
+        )
+      ) : (
+        <EmptyPlot key={i} />
+      );
+    });
   };
   render() {
-    return this.props.potatoFarmStore.plantedPotatoes > 0 ? (
-      this.props.potatoFarmStore.plotsReady ? (
-        <FilledPlotReady
-          onClick={() =>
-            this.props.potatoFarmStore.harvestPlots(
-              this.props.potatoFarmStore.plantedPotatoes
-            )
-          }
-        >
-          {this.count()}
-        </FilledPlotReady>
-      ) : (
-        <FilledPlot>{this.count()}</FilledPlot>
-      )
-    ) : (
-      <EmptyPlot>{this.count()}</EmptyPlot>
-    );
+    return <Div>{this.plots()}</Div>;
   }
 }
 
 const PlotPiece = styled.div`
   width: 100px;
   height: 100px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const FilledPlot = styled(PlotPiece)`

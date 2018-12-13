@@ -5,6 +5,7 @@ import FreePotato from "./FreePotato";
 import { RowDiv, ColumnDiv } from "../styles/styles";
 import { PotatoPlot } from "./PotatoPlot";
 import { Paper } from "@material-ui/core";
+import { PotatoPlotIndividual } from "./PotatoPlotIndividual.1";
 
 interface Props {
   potatoFarmStore?: PotatoFarmStore;
@@ -22,7 +23,11 @@ export class PotatoFarm extends React.Component<Props> {
           </ColumnDiv>
           <ColumnDiv>
             <RowDiv>Potato Plots</RowDiv>
-            <PotatoPlot />
+            {this.props.potatoFarmStore.plots >= 200 ? (
+              <PotatoPlot />
+            ) : (
+              <PotatoPlotIndividual />
+            )}
           </ColumnDiv>
         </Paper>
       </ColumnDiv>

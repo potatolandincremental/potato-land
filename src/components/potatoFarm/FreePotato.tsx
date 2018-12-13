@@ -83,7 +83,7 @@ const ImgDiv = styled(Div)`
   background-size: 100%;
 `;
 
-const CountDiv = styled(Div)`
+export const CountDiv = styled(Div)`
   background-color: white;
   opacity: 0.7;
   border-radius: 6px;
